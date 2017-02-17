@@ -8,7 +8,7 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 本项目只是一个技术框架，对于项目中具体的业务的东西只会大概的说明一下。
 
 
-**==说明：==** 可能有些朋友不知道[signalR](httphttp://signalr.net/)是什么东西，其实[signalR](httphttp://signalr.net/)就是让客户端（Web页面）和服务器端可以互相通知消息及调用方法的前端JS，当WebSockets可用时（即浏览器支持Html5）[signalR](httphttp://signalr.net/)使用WebSockets，当不支持时[signalR](httphttp://signalr.net/)将使用其它技术来保证达到相同效果。
+**说明：** 可能有些朋友不知道[signalR](httphttp://signalr.net/)是什么东西，其实[signalR](httphttp://signalr.net/)就是让客户端（Web页面）和服务器端可以互相通知消息及调用方法的前端JS，当WebSockets可用时（即浏览器支持Html5）[signalR](httphttp://signalr.net/)使用WebSockets，当不支持时[signalR](httphttp://signalr.net/)将使用其它技术来保证达到相同效果。
 
 
 > 1. 前端UI的部分使用mui框架
