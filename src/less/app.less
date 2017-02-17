@@ -1,0 +1,155 @@
+/* === app基础样式  (start) === */
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 320px;
+    background: #f9f9f9;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #333;
+    
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0;
+}
+
+body,button,input,select,textarea {
+    font: normal 14px/1.5  "PingFang SC", "Heiti SC","Arial","Lucida Grande",Verdana,STXhei,"Microsoft YaHei","hei";
+}
+[v-cloak] {
+    display: block;
+}
+
+.app {
+    height: 100%;
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.toolbar-fixed {
+    padding: 0 0 50px;
+}
+
+.views, .view, .pages {
+    height: 100%;
+}
+
+.views .view .pages {
+    height: 100%;
+    
+    [data-page] {
+        height: 100%;
+        
+        .page-content {
+            height: 100%;
+        }
+    }
+}
+    
+/*下一页*/
+.next-enter-active {
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.next-enter, .next-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+}
+
+.next-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+/*上一页*/
+.prev-enter-active {
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+}
+
+.prev-enter, .prev-leave-active {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.prev-active {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+footer.toolbar {
+    z-index: 2000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    width: 100%;
+    min-width: 320px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    
+    .toolbar-icon, .toolbar-link {
+        font-size: 12px;
+        text-align: center;
+        height: 100%;
+    }
+    
+    .toolbar-link{
+        &.router-link-active {
+            color: #d70000;
+        }
+        
+        .mui-icon {
+            display: block;
+            margin: 6px auto 0;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+        }
+    }
+}
+
+.test-require-img {
+    background-image: url('../imgs/test/248.jpg');
+}
+//{
+//  font-size: 12px;
+//  text-align: center;
+//}
+/* === app基础样式  (end) === */
+@import url('_mixins.less');
+@import url('_colors-vars.less');
+//@import url('accordion.less');
+//@import url('grid.less');
+//@import url('lists.less');
+//@import url('modals.less');
+//@import url('tabs.less');
+//@import url('toolbars.less');
+//@import url('icons.less');
+//@import url('badges.less');
+
+

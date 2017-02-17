@@ -1,0 +1,6 @@
+{
+  "presets": ["es2015", "stage-2"],
+  "ignore": [
+    "./src/js/lib/mui.js"
+  ]
+}
