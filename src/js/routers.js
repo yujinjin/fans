@@ -10,33 +10,58 @@ export default {
 	},{
 		path: '/users/user-center', //用户中心
 		name: "userCenter",
-		meta: { title: "用户中心" },
-		component: require('../views/users/user-center.vue') //resolve => require(['../views/home.vue'], resolve)
+		meta: { title: "个人中心" },
+		component: require('../views/users/user-center.vue') 
+	},{
+		path: '/users/my-message-list', //消息中心
+		name: "myMessageList",
+		meta: { title: "消息列表" },
+		component: require('../views/users/my-message-list.vue') 
+	},{
+		path: '/users/message-details', //消息中心
+		name: "messageDetails",
+		meta: { title: "消息详情" },
+		component: require('../views/users/message-details.vue') 
+	},{
+		path: '/users/user-info', //个人资料
+		name: "userInfo",
+		meta: { title: "个人资料" },
+		component: require('../views/users/user-info.vue') 
+	},{
+		path: '/users/reset-password', //个人资料
+		name: "resetPassword",
+		meta: { title: "重设密码" },
+		component: require('../views/users/reset-password.vue') 
 	},{
 		path: '/users/register', //注册
 		name: "register",
 		meta: {auth: false, title: "注册" },
-		component: require('../views/users/register.vue') //resolve => require(['../views/home.vue'], resolve)
+		component: require('../views/users/register.vue') 
 	},{
 		path: '/users/login', //登录
 		name: "login",
 		meta: {auth: false, title: "登录" },
-		component: require('../views/users/login.vue') //resolve => require(['../views/home.vue'], resolve)
+		component: require('../views/users/login.vue') 
+	},{
+		path: '/customerGather/my-customer-gathers',
+		name: "myCustomerGathers",
+		meta: {title: "我的集客" },
+		component: require('../views/customerGather/my-customer-gathers.vue') 
 	},{
 		path: '/barcode', //二维码扫描
 		name: "barcode",
 		meta: {title: "二维码扫描" },
-		component: require('../views/barcode.vue') //resolve => require(['../views/home.vue'], resolve)
+		component: require('../views/barcode.vue') 
 	},{
 		path: '/users/welcome', //登录
 		name: "welcome",
 		meta: {auth: false, title: "启动欢迎" },
-		component: require('../views/users/welcome.vue') //resolve => require(['../views/home.vue'], resolve)
+		component: require('../views/users/welcome.vue') 
 	},{
 		path: '*', //未发现该页面
 		name: "notFound",
 		meta: {auth: false, title: "未发现该页面" },
-		component: require('../views/error/404.vue') //resolve => require(['../views/home.vue'], resolve)
+		component: require('../views/error/404.vue') 
 	}],
 	
 	//使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 
@@ -112,7 +137,11 @@ export default {
 				appRouters.clear();
 				break;
 			case 'userCenter':
-				store.dispatch("updateNavbarStatus",{isShowBack: true});
+				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
+				appRouters.clear();
+				break;
+			case 'myCustomerGathers':
+				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
 				appRouters.clear();
 				break;
 			case 'login':
@@ -129,7 +158,7 @@ export default {
 				appRouters.clear();
 				break;
 			default:
-				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowFoot: false});
+				store.dispatch("updateNavbarStatus",{isShowFoot: false});
 				break;
 		}
 //		if(site.globalService.isLogin() && "_login _reg _smslogin".indexOf(transition.to.name) != -1) {

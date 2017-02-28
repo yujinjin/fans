@@ -1,9 +1,9 @@
 ## 前言
-这是一个html5+打包app(android/iOS)项目
+这是一个html5+打包app(android/iOS)项目,目录中android Apk打包文件,[点此链接下载](https://github.com/yujinjin/fans/tree/master/unpackage/release/Fans.apk)。 
 
 前端h5是基于[mui](http://dev.dcloud.net.cn/mui/) + [vue2](http://cn.vuejs.org/v2/api/) + [vue-router2](http://router.vuejs.org/zh-cn/) + [es6](http://es6.ruanyifeng.com/) + [webpack2](http://webpack.github.io/) + [vuex](http://vuex.vuejs.org/zh-cn/) + [signalR](http://signalr.net/)的前端webApp单页项目框架。
 
-app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键打包成APP，本项目使用了原生设备的的Storage和管理条码扫描。对于app的升级是html5资源在线升级更新,而不是整个APP更新。这些都是[dcloud](http://www.dcloud.io/index.html)提供一整套套技术解决方案。
+app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键打包成APP，本项目使用了原生设备的的Storage和管理条码扫描。对于app的升级是html5资源在线升级更新,而不是整个APP更新。这些都是[dcloud](http://www.dcloud.io/index.html)提供一整套技术解决方案。
 
 本项目只是一个技术框架，对于项目中具体的业务的东西只会大概的说明一下。
 
@@ -255,17 +255,19 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 
 
 ##### 4. 个人中心
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/227254DE56E2459AB053B31352688643/965)
 
 ###### 4. 1. 我的收益
 
 
 ###### 4. 2. 密码修改
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/BA781772D4964035B55AA432CA0A9C21/972)
 
+###### 4. 3. 消息列表
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/C08C00F62A0E46AE94D8031AFD9E3864/974)
 
-###### 4. 3. 消息内容
-
-
+###### 4. 4. 消息内容
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DC592CD8FA92455E8C445120FC6D0242/975)
 
 ## 运行程序
 
@@ -593,57 +595,613 @@ if(NODE_RUN === "0") {
 
 ## webApp技术框架说明
 ##### 1. 入口（entrance.js）
+webpack的入口加载文件，也是Webapp的初始化。主要做app SUI的初始化、VUE的初始化、webapp的常用JS加载。
 
+```
+import babelPolyfill from 'babel-polyfill'
+import mui from "./lib/mui"
+import app from './app'
+import globalService from './services/global-service'
+import log from './utils/log'
+import utils from './utils/utils'
+import directives from "./utils/directives"
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import routers from "./routers"
+import vueApp from "../views/app"
+import store from "./store/"
+import jQuery from "./lib/jquery-1.12.4"
 
+Object.assign(app.Config, config);
+window.app = Object.assign({}, app, {log, utils, mui, globalService});
+//signalR是基于jquery的，所以必须要把jQuery引进来，仅仅是用于signalR。太恶心了，其实我TM的真的不想这样...
+window.jQuery = window.$ = jQuery;
+const initVue = function(){
+	Vue.use(Vuex);
+	Vue.use(VueRouter);
+	Object.keys(directives).forEach((key) => {
+	    Vue.directive(key, directives[key]);
+	});
+	const [router, VueApp] = [routers.createRouter(VueRouter, store), Vue.extend(vueApp)];
+	window.app.vueApp = new VueApp({ router, name: "app", store }).$mount('#app');
+}
+mui.init({
+	swipeBack:false, //关闭右滑关闭功能（默认就是false）
+	keyEventBind: {
+		backbutton: true  //开启back按键监听（默认就是true）
+	},
+	statusBarBackground: "#1981D8" //设置状态栏颜色,仅iOS可用
+});
+if(mui.os.plus) {
+	app.Config.isApp = true;
+	mui.plusReady(function(){
+		Object.assign(app.Config.device, {
+			isAndroid : plus.os.name === "Android", //是否在安卓环境内
+			isIOS : plus.os.name === "iOS", //是否在IOS环境内
+			model: plus.device.model, //设备的型号
+			imsi: plus.device.imsi, //设备的国际移动用户识别码 ,//Android - 2.2+ (支持): 如果设备没有插入SIM卡，则返回空数组。|iOS - 4.5+ (不支持): iOS设备不支持获取SIM卡信息，返回空数组。
+			vendor: plus.device.vendor, // 设备的生产厂商
+			uuid: plus.device.uuid, //设备的唯一标识
+//			resolutionHeight: plus.screen.resolutionHeight * plus.screen.scale, //设备屏幕高度分辨率
+//			resolutionWidth: plus.screen.resolutionWidtht * plus.screen.scale, //设备屏幕宽度分辨率，目前好像是空的
+//			scale: plus.screen.scale, //逻辑分辨率与实际分辨率的比例
+			version: plus.os.version, //系统版本信息
+			osName: plus.os.name //系统的名称
+		});
+		app.Config.version = plus.runtime.version;
+		app.Config.clientVersion = plus.runtime.innerVersion;
+		initVue();
+	});
+} else {
+	mui.ready(function() {
+		initVue();
+	});
+}
+```
 
 ##### 2. app配置以及其他方法（app.js）
 
 
 
+```
+/**
+ * 作者：yujinjin9@126.com
+ * 时间：2016-03-03
+ * 描述：app 核心框架
+ */
+const site = {
+	Config: {
+		resourecePath: "", //资源服务路径
+		serverPath: "", //服务路径
+		version: "", //app版本
+		releaseTime: "", //发布时间
+		isDebug: true, //是否是前端调试状态
+		innerVersion : "999.999.999", // 获得当前终端的版本号
+		startVersion: "0.1.1", //app启动动画版本号
+		isInsideApp : false, // 是否在APP应用环境内
+		isWeiXin : false, //是否在微信环境内
+		isApp: false, //是否是在app内
+		device: {
+			isAndroid : false, //是否在安卓环境内
+			isIOS : false, //是否在IOS环境内
+			model: null, //设备的型号
+			imsi: null, //设备的国际移动用户识别码 ,//Android - 2.2+ (支持): 如果设备没有插入SIM卡，则返回空数组。|iOS - 4.5+ (不支持): iOS设备不支持获取SIM卡信息，返回空数组。
+			vendor: null, // 设备的生产厂商
+			uuid: null, //设备的唯一标识
+			resolutionHeight: null, //设备屏幕高度分辨率
+			resolutionWidth: null, //设备屏幕宽度分辨率
+			scale: null, //逻辑分辨率与实际分辨率的比例
+			version: null, //系统版本信息
+			osName: null, //系统的名称
+		}//设备信息
+	},
+
+	initApp() {
+		//获取当前环境
+		if(window.navigator && window.navigator.userAgent) {
+			var ua = window.navigator.userAgent.toLocaleLowerCase();
+			site.Config.isWeiXin = (ua.match(/MicroMessenger/i) == 'micromessenger');
+		}
+	},
+
+	//重写ajax定义的方法，主要用于自己业务逻辑上的处理
+	ajax: function(options) {
+		let _url = null;
+		if(app.Config.isApp && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE){
+			app.mui.toast('<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~网络连接不上，请检测网络。点此刷新重试</a>', {duration:'8000', type:'div'});
+			return;
+		}
+		if(typeof(options) === "string"){
+			_url = options;
+		} else if(typeof(options) !== "object" || !options.url){
+			app.mui.alert("Ajax 参数错误！");
+			return;
+		} else {
+			_url = options.url;
+			delete options.url;
+		}
+		var _default = {
+			type: "POST",
+            dataType: "json",
+            headers:{'Content-Type':'application/json'},
+            processData: true, //是否自动处理data数据
+            async: true,
+            timeout: 20000,
+            auth: false, //是否验证当前API接口的登录权限
+            authFailCallbackFun: null, // 验证失败的回调函数
+            successFunData: true, //是否验证成功回调函数的数据
+            showLoading: false //是否显示加载
+		};
+        var _options = app.mui.extend(true, {}, _default, options);
+       	if(!_options.data) {
+       		_options.data = {};
+       	}
+       	if(_options.type.toUpperCase() === 'GET'){
+        	_url += '&rnd='+ (+new Date()+'');
+        	_options.data = _options.data || {};
+        } else if(!_url.match(/^(?:http|ftp|https):\/\//)){
+        	//如果传的url含有 http://说明是个绝对路径，就不用拼了
+            _url = app.Config.webapiDomain + _url;
+        }
+        if(_default.processData && typeof(_options.data) === "object" && _options.type.toUpperCase() === 'POST'){
+        	_options.data = JSON.stringify(_options.data);
+        }
+        if(_options.auth === true && !app.globalService.isLogin()) {
+        	if(typeof(_options.authFailCallbackFun) === "function"){
+        		_options.authFailCallbackFun();
+        	}
+        	return;
+        }
+        _options.success = function(data, textStatus){
+        	if(_options.showLoading === true){
+            	//router.app.$emit('vHideLoad')
+            }
+        	var _data = data;
+        	if(_options.successFunData === true){
+        		if(data.success){
+        			_data = data.result;
+    			} else if(data.error && data.error.message) {
+					app.mui.alert(data.error.message, "错误提示");
+					return;
+				} else {
+					app.mui.toast("出错了！");
+					return;
+				}
+        	}
+        	if(typeof(options.success) === "function"){
+        		options.success(_data);
+        	}
+        	if(typeof(options.complete) === "function"){
+        		options.complete(data, textStatus);
+        	}
+        }
+        _options.error = function(xhr, error){
+        	if(_options.showLoading === true){
+        		_options.showLoading = false;
+            	//router.app.$emit('vHideLoad');
+            }
+            app.log.debug(xhr, error);
+        	if(typeof(options.error) === "function"){
+        		options.error(xhr, error);
+        	} else if (xhr.response) {
+        		var responseJSON = null;
+        		try{
+        			responseJSON = JSON.parse(xhr.response);
+        		}catch(e){}
+        		if(responseJSON && responseJSON.__abp && responseJSON.unAuthorizedRequest){
+        			//app.mui.toast('<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~登录过期了。点此重新登录</a>', {duration: 8000, type:'div'});
+        			app.mui.confirm("亲~登录过期了！", null, ['想再看看','去登录'], function(e){
+        				if(e.index === 1){
+        					app.vueApp.$router.push({ name: 'login' });
+        				}
+        			});
+        		} else if(responseJSON && responseJSON.__abp && responseJSON.error && responseJSON.error.message){
+        			app.mui.toast(responseJSON.error.message);
+        		}
+            } else {
+                app.mui.toast('<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~服务出错了。点此刷新重试</a>', {duration: 8000, type:'div'});
+            }
+        	if(typeof(options.complete) === "function"){
+        		options.complete(xhr, error);
+        	}
+        }
+        _options.beforeSend = function(xhr){
+        	//xhr.setRequestHeader("ClientVersion", app.Config.innerVersion);
+        	var _token = app.globalService.getLoginUserInfo().token;
+        	if(_token){
+                xhr.setRequestHeader("Authorization", _token);
+            }
+            if(_options.showLoading === true){
+            	//router.app.$emit('vShowLoad');
+            }
+            if(typeof(options.beforeSend) === "function"){
+        		options.beforeSend(xhr);
+        	}
+        }
+        app.mui.ajax(_url, _options);
+	},
+	
+	//获取图片地址，如果地址带有 http://那么就认为是绝对地址，然后直接返回
+    getResourceUrl: function(url){
+    	if(url && url.match(/http:\/\//)){
+            return url;
+    	}
+        //全站统一配置
+        if(window.abp){
+            return app.Config.imageDomain + url;
+        }
+        return "http://img.yaomaiche.com" + url;
+    },
+
+	//获取站点本地存储信息
+	getSiteLocalStorage: function(){
+		var _site_local_storage = app.utils.localStorage("siteLocalStorage");
+		if(_site_local_storage) {
+			try {
+				_site_local_storage = JSON.parse(_site_local_storage);
+			}catch(e){
+				app.log.error(e);
+			}
+		}
+		if(_site_local_storage == null || typeof(_site_local_storage) != "object"){
+			_site_local_storage = {};
+		}
+		return _site_local_storage;
+	},
+};
+site.initApp();
+module.exports = site;
+```
+
 ##### 3. 单页路由配置（routers.js）
+
+```
+import globalService from './services/global-service'
+import appRouters from "./components/app-routers"
+
+export default {
+	routes: [{
+		path: '/', //首页
+		name: "home",
+        meta: { title: "首页" },
+		component: require('../views/home.vue') //resolve => require(['../views/home.vue'], resolve)
+	},{
+		path: '/users/user-center', //用户中心
+		name: "userCenter",
+		meta: { title: "个人中心" },
+		component: require('../views/users/user-center.vue') 
+	},{
+		path: '/users/my-message-list', //消息中心
+		name: "myMessageList",
+		meta: { title: "消息列表" },
+		component: require('../views/users/my-message-list.vue') 
+	},{
+		path: '/users/message-details', //消息中心
+		name: "messageDetails",
+		meta: { title: "消息详情" },
+		component: require('../views/users/message-details.vue') 
+	},{
+		path: '/users/user-info', //个人资料
+		name: "userInfo",
+		meta: { title: "个人资料" },
+		component: require('../views/users/user-info.vue') 
+	},{
+		path: '/users/reset-password', //个人资料
+		name: "resetPassword",
+		meta: { title: "重设密码" },
+		component: require('../views/users/reset-password.vue') 
+	},{
+		path: '/users/register', //注册
+		name: "register",
+		meta: {auth: false, title: "注册" },
+		component: require('../views/users/register.vue') 
+	},{
+		path: '/users/login', //登录
+		name: "login",
+		meta: {auth: false, title: "登录" },
+		component: require('../views/users/login.vue') 
+	},{
+		path: '/customerGather/my-customer-gathers',
+		name: "myCustomerGathers",
+		meta: {title: "我的集客" },
+		component: require('../views/customerGather/my-customer-gathers.vue') 
+	},{
+		path: '/barcode', //二维码扫描
+		name: "barcode",
+		meta: {title: "二维码扫描" },
+		component: require('../views/barcode.vue') 
+	},{
+		path: '/users/welcome', //登录
+		name: "welcome",
+		meta: {auth: false, title: "启动欢迎" },
+		component: require('../views/users/welcome.vue') 
+	},{
+		path: '*', //未发现该页面
+		name: "notFound",
+		meta: {auth: false, title: "未发现该页面" },
+		component: require('../views/error/404.vue') 
+	}],
+	
+	//使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+	    	return savedPosition;
+	  	} else {
+	    	return { x: 0, y: 0 };
+	  	}
+	  	if (to.hash) {
+    		return { selector: to.hash};
+  		}
+	},
+	
+	//创建路由
+	createRouter(VueRouter, store){
+		var _this = this;
+		var router = new VueRouter({
+			//路由列表
+			routes: _this.routes,
+			//使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 
+			scrollBehavior: _this.scrollBehavior,
+			//hash: 使用 URL hash 值来作路由。支持所有浏览器，包括不支持 HTML5 History Api 的浏览器。
+			//history: 依赖 HTML5 History API 和服务器配置。查看 HTML5 History 模式.
+			//abstract: 支持所有 JavaScript 运行环境，如 Node.js 服务器端。如果发现没有浏览器的 API，路由会自动强制进入这个模式。
+			//mode: 'history',
+			//应用的基路径。例如，如果整个单页应用服务在 /app/ 下，然后 base 就应该设为 "/app/"。
+			base: "/",
+			//全局配置 <router-link> 的默认『激活 class 类名』。参考 router-link.
+			linkActiveClass: "router-link-active"
+		});
+		//const [_push, _go, _replace] = [router.push, router.go, router.replace];
+		const {push, go, replace} = router;
+		router.push = function(location) {
+			console.info("........push");
+			if(!store.state.routerStatus.direction){
+				store.dispatch("updateDirection", "going");
+			}
+			push.call(this, location);
+		}
+		router.go = function(n) {
+			console.info("........go");
+			if(store.state.routerStatus.direction != "backing"){
+				store.dispatch("updateDirection", "backing");
+			}
+			go.call(this, location);
+		}
+		router.replace = function(location) {
+			console.info("........replace");
+			if(store.state.routerStatus.direction != "replace"){
+				store.dispatch("updateDirection", "replace");
+			}
+			replace.call(this, location);
+		}
+		router.beforeEach((to, from, next)=>_this.beforeEach(to, from, next, store));
+		router.afterEach((router)=> _this.afterEach(router, store));
+		return router;
+	},
+
+	//访问之前的函数
+	beforeEach(to, from, next, store){
+		console.info(to.name + "...................beforeEach");
+		if(JSON.stringify(store.state.routerStatus.backConfig) !== "{}") {
+			store.dispatch("resetBackConfig");
+		}
+		if(to.meta.auth !== false && !globalService.isLogin()){
+			next({name: 'login', query: Object.assign({toName: to.name}, to.query)});
+			return;
+		}
+		switch(to.name) {
+			case 'home':
+				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
+				appRouters.clear();
+				break;
+			case 'userCenter':
+				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
+				appRouters.clear();
+				break;
+			case 'myCustomerGathers':
+				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
+				appRouters.clear();
+				break;
+			case 'login':
+				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: true, isShowFoot: false});
+				appRouters.clear();
+				break;
+			case 'welcome':
+				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: false, isShowFoot: false});
+				appRouters.clear();
+				break;
+			case 'barcode':
+				store.dispatch("updateTransition", null);
+				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: false, isShowFoot: false});
+				appRouters.clear();
+				break;
+			default:
+				store.dispatch("updateNavbarStatus",{isShowFoot: false});
+				break;
+		}
+//		if(site.globalService.isLogin() && "_login _reg _smslogin".indexOf(transition.to.name) != -1) {
+//			next({path: '/login', query: { redirect: to.fullPath }});
+//			return;
+//		}
+		// 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed （确认的）。
+		// next(false): 中断当前的导航。如果浏览器的 URL 改变了（可能是用户手动或者浏览器后退按钮），那么 URL 地址会重置到 from 路由对应的地址。
+		// next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。
+		next();
+		if(store.state.routerStatus.direction) {
+			appRouters.push((store.state.routerStatus.direction == "going" || store.state.routerStatus.direction == "backing" || store.state.routerStatus.direction == "replace"), {
+				name: to.name,
+				query: to.query,
+				url: window.location.href
+			});
+		} else {
+			store.dispatch("updateDirection", appRouters.push(false, {name: to.name, query: to.query, url: window.location.href}) ? "going" : "backing");
+		}
+		console.info("...................next");
+		store.dispatch("updateDirection", null);
+	},
+	
+	//可以记录访问路径
+	afterEach(router, store){
+		console.info("...................afterEach");
+		if(router.meta.title && router.meta.title != store.state.appData.navbarTitle){
+			store.dispatch("updateNavbarTitle", router.meta.title);
+		}
+	}
+}
+```
 
 
 
 ##### 4. 视图组件
+存放app的视图组件的目录，目前有加载动画、二维码、弹窗3个组件。
 
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/9E24002FF01640D885F43821D0477FE0/1040)
 
 
 ##### 5. JS组件
+下面是目录JS组件文件的截图，主要是存放app的路由、弹窗、signalR组件
 
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/3485025E71B247A98F3577B05B305F93/1007)
 
 ##### 6. 环境打包配置
+DEV、GQC、PRD、PRE、UAT环境的打包配置文件，比如DEV.js的配置文件如下：
 
-
-
-
+```
+/**
+ * 作者：yujinjin9@126.com
+ * 时间：2016-03-07
+ * 描述：dev 外部接口配置文件
+ */
+module.exports = {
+	//M站点的接口地址
+	webapiDomain:'http://storeapi.dev.XXX.cn',
+	//M站点的地址
+	msiteDomain:'http://msite.dev.platform.XXX.com',
+	//支付服务器地址
+	payDomain:'http://pay.shdev.XXX.com',
+	//获取资源服务器地址
+	imageDomain:'http://img.shdev.ymc.com',
+	//上传资源服务器地址
+	resourceUploadUrl:'http://resource.shdev.XXX.com/Uploader',
+	//无线H5服务器地址
+	h5ServiceHost:'http://h5.private.XXX.app:7070',
+	//公共服务站点地址
+	commonDomain: "http://common.dev.ymc.com:8080"
+	//UBT服务器地址
+}
+```
 
 ##### 7. app自己的业务
+目前app自己所特有的业务逻辑是global-service.js,是全局业务逻辑用于判断当前用户登录、站点本地存储等一些业务处理。具体代码如下：
 
-
+```
+/**
+ * 作者：yujinjin9@126.com
+ * 时间：2015-08-04
+ * 描述：APP 全局业务逻辑
+ */
+export default{
+	//判断当前用户信息是否登录
+	isLogin() {
+        return true;
+    },
+    
+    //获取启动项标志
+    getStartFlag(){
+    	//如果不是app始终返回true
+    	if(!app.Config.isApp) {
+    		return true;
+    	}
+    	const _site_local_storage = app.getSiteLocalStorage();
+    	if(_site_local_storage.startInfo) {
+    		return (_site_local_storage.startInfo.flag === true && _site_local_storage.startInfo.version === app.Config.startVersion);
+    	}
+    	return false;
+    },
+    
+    //设置启动项标志
+    setStartFlag(flag){
+    	const _site_local_storage = app.getSiteLocalStorage();
+		if(_site_local_storage.startInfo == null || typeof(_site_local_storage.startInfo) != "object"){
+			_site_local_storage.startInfo = {};
+		}
+		Object.assign(_site_local_storage.startInfo, {flag: flag, version: app.Config.startVersion});
+		app.utils.localStorage("siteLocalStorage", JSON.stringify(_site_local_storage));
+    },
+    
+    //获取用户登录的Token信息
+    getLoginUserInfo(){
+    	const [_currentTime, _userInfo] = [(new Date()).getTime(), app.getSiteLocalStorage().userInfo || {}];
+    	if(_userInfo.expireTime && (_userInfo.expireTime - _currentTime) > 0) {
+    		return _userInfo;
+    	} else {
+    		app.globalService.setUserInfo({});
+    		return {};
+    	}
+    },
+    
+    //退出登录
+    logOut(){
+    	app.globalService.setUserInfo({});
+    },
+    
+    //设置用户信息
+    setUserInfo({tenancyName, token, usernameOrEmailAddress, expireTime = -1}) {
+    	if(expireTime > 0) {
+    		const _site_local_storage = app.getSiteLocalStorage();
+			if(_site_local_storage.userInfo == null || typeof(_site_local_storage.userInfo) != "object"){
+				_site_local_storage.userInfo = {};
+			}
+			expireTime = (new Date()).getTime() + (expireTime - 60) * 1000;
+			Object.assign(_site_local_storage.userInfo, {tenancyName, token, usernameOrEmailAddress, expireTime, version: app.Config.innerVersion});
+    		app.utils.localStorage("siteLocalStorage", JSON.stringify(_site_local_storage));
+    	} else {
+    		app.utils.localStorage("siteLocalStorage", "{}");
+    	}
+    },
+    
+    //app更新升级 TODO: 需要根据实际的业务数据调整 by yujinjin
+    updateApp(){
+    	//mui.os.plus && !mui.os.stream && mui.plusReady(update);
+    	app.ajax({
+    		url: "", //更新URL
+    		data: {
+    			"appid": plus.runtime.appid,
+				"version": plus.runtime.version,
+				"imei": plus.device.imei
+    		},
+    		success: function(data){
+    			if (data.status) {
+					plus.nativeUI.confirm(data.note, function(event) {
+						if (0 == event.index) {
+							plus.runtime.openURL(data.url);
+						}
+					}, data.title, ["立即更新", "取　　消"]);
+				}
+    		}
+    	});
+    }
+}
+```
 
 
 ##### 8. vuex管理webApp的数据状态
+存放webApp的临时数据，目前有app业务数据、定义事件、路由状态信息，其index.js是数据管理的入口文件。
 
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/FF28D56C4EF04F4DBDA0DD9740DD1BAB/1027)
 
 ##### 9. webapp的工具包
+存放app的工具包，目前有自定义指令、日志、更新、常用方法。
 
-
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/48323BE4CE9144988A25D2A3F9AB0D97/1026)
 
 
 ##### 10. webapp的页面视图
 
+下面是目录视图文件的截图，主要是首页、登录、个人中心等页面视图。
 
-
-
-
-
-
-
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/4E375B79F2C940D1B33A20DAFF17CF6C/999)
 
 
 

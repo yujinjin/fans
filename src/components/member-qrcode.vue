@@ -7,7 +7,7 @@
 						会员扫描二维码
 					</h4>
 				</div>
-				<div class="modal-body" @click.stop>
+				<div class="modal-body" @tap.stop>
 					<div class="modal-body-con">
 						<div class="qrcode-panel">
 							<template v-if="qrcodeImgSrc"><img :src="qrcodeImgSrc" class="qrcode-img"/></template>

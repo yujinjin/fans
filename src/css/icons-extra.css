@@ -4,6 +4,7 @@
     font-style: normal;
     src:  url('../fonts/mui-icons-extra.ttf') format('truetype'); /* iOS 4.1- */
 }
+
 .mui-icon-extra
 {
     font-family: MuiiconSpread;
@@ -61,3 +62,37 @@
 .mui-icon-extra-phone:before { content: "\e404"; }
 .mui-icon-extra-university:before { content: "\e605"; }
 .mui-icon-extra-outline:before { content: "\e606"; }
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?v0pluw');
+  src:  url('../fonts/icomoon.eot?v0pluw#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?v0pluw') format('truetype'),
+    url('../fonts/icomoon.woff?v0pluw') format('woff'),
+    url('../fonts/icomoon.svg?v0pluw#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-man:before {
+  content: "\e900";
+}
+.icon-woman:before {
+  content: "\e901";
+}

@@ -2,6 +2,10 @@
     <div data-page="home">
     	<div class="page-content">
     		<div class="mui-row header">
+    			<div class="mui-col-xs-12 title">
+    				<span>粉丝煲</span>
+    				<span class="mui-icon mui-icon-email"><i class="new"></i></span>
+    			</div>
 		        <div class="mui-col-xs-6 handle-module">
 	            	<span class="mui-icon-extra mui-icon-extra-sweep" @tap.stop.prevent="scanCode"></span>
 	            	扫码核销
@@ -46,7 +50,7 @@
 		    	</div>
 		    </div>
 		    <div class="main-footer-pic">
-	    		<img src="../imgs/main-footer-pic.jpg" width="100%" height="155"/>
+	    		<img src="../imgs/main-footer-pic.jpg" width="100%" height="110"/>
 	    	</div>
 	    	<memberQrcode v-bind:show="memberQrcodeState" v-on:show="showMemberQrcode"></memberQrcode>
     	</div>
@@ -118,11 +122,37 @@ module.exports = {
 				background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1981D8), to(#48A5F3));      /* Safari 4-5, Chrome 1-9*/
 				background: -webkit-linear-gradient(top, #1981D8, #48A5F3);   /*Safari5.1 Chrome 10+*/
 				background: -o-linear-gradient(top, #1981D8, #48A5F3);  /*Opera 11.10+*/
-				height: 100px;
+				height: 130px;
 				color: white;
 				
+				.title {
+					height: 30px;
+					text-align: center;
+					
+					span {
+						line-height: 30px;
+					}
+					
+					.mui-icon-email {
+						float: right;
+					    margin-right: 20px;
+					    position:relative;
+					    
+					    .new {
+					    	display: block;
+						    background: #f00;
+						    border-radius: 50%;
+						    width: 5px;
+						    height: 5px;
+						    top: 8px;
+						    right: 2px;
+						    position: absolute;
+					    }
+					}
+				}
+				
 				.handle-module {
-					height: 100%;
+					height: 100px;
 					text-align: center;
 					
 					span {

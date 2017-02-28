@@ -1,6 +1,24 @@
 <template>
 	<div data-page="login">
 		<div class="page-content">
+			<!--<div class="login-input-box">
+	            <div class="logo">
+	                <p>个人日记</p>
+	            </div>
+	            <div class="line1">
+	                <img src="../../imgs/user.png">
+	                <input type="text" class="user" value="" placeholder="用户名">
+	            </div>
+	            <div class="line2">
+	                <img src="../../imgs/lock.png">
+	                <input type="text" class="lock" value="" placeholder="密码">
+	            </div>
+	            <div class="chose">
+	                <a data-ajax="false" class="register" data-role="none" data-transition="slide">注册</a>
+	                <a href="forget.html" data-ajax="false" class="forgive" data-role="none">忘记密码</a>
+	                <a class="login" href="index.html" data-ajax="false" data-role="none" data-transition="slide">登陆</a>
+	            </div>
+	        </div>-->
 			<div class="mui-input-group">
 				<div class="mui-input-row">
 					<label>商户编码</label>
@@ -26,7 +44,7 @@
 				</ul>
 			</form>-->
 			<div class="mui-content-padded">
-				<button class="mui-btn mui-btn-block mui-btn-primary" data-loading-icon-position="right" @click.stop.prevent="sumbit($event)">登录</button>
+				<button class="mui-btn mui-btn-block mui-btn-primary" data-loading-icon-position="right" @tap.stop.prevent="sumbit($event)">登录</button>
 				<div class="link-area">
 					<a>注册账号</a> 
 					<span class="spliter">|</span> 
@@ -102,6 +120,84 @@ export default {
 </script>
 <style lang="less" scoped>
 	[data-page='login'] {
+		
+		/*background-image: url(../../imgs/login-bg.jpg);
+		background-size:100% 100%;
+		-moz-background-size:100% 100%;
+	   	-webkit-background-size:100% 100%;
+	   	-o-background-size:100% 100%;
+		
+		.login-input-box {
+			width: 80%;
+		    margin: auto;
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    -webkit-transform: translate(-50%,-50%);
+		    -moz-transform: translate(-50%,-50%);
+		    transform: translate(-50%,-50%);
+		    
+		    .logo p {
+			    font-size: 2.2rem;
+			    text-align: center;
+			}
+			
+			.line1, .line2, .line3 {
+			    width: 98%;
+			    overflow: hidden;
+			    border-bottom: 1px solid #aaa;
+			    padding-left: 2%;
+			    margin-top: 40px;
+			}
+			
+			.line1 img, .line2 img, .line3 img {
+			    float: left;
+			    padding-top: 0px;
+			}
+			
+			.user, .lock, .mail {
+			    float: left;
+			    width: 85%;
+			    height: 35px;
+			    border: none;
+			    padding-left: 3%;
+			    line-height: 2.4rem;
+			    font-size: 1.2rem;
+			    outline: none;
+			    color: #4d4d4d;
+			    background: none;
+			    margin-bottom: 0px;
+			}
+			
+			.line1 {
+			    margin-top: 80px;
+			}
+			
+			.register, .forgive{
+			    margin-top: 20px;
+			    color: #4d4d4d !important;
+			    font-weight: normal;
+			    padding: 0px 2%;
+			}
+			.register{
+			    float: left;
+			}
+			.forgive{
+			    float: right;
+			}
+			.chose .login{
+			    float: left;
+			    margin: 40px 0;
+			    width: 100%;
+			    font-size: 1.2rem;
+			    line-height:2.6rem;
+			    text-align: center;
+			    color: #4d4d4d!important;
+			    background:#e5e5e5;
+			    border-radius: 20px;
+			}
+		}*/
+		
 		.link-area {
 			text-align: center;
 		}

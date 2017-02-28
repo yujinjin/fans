@@ -3,9 +3,9 @@
 		<header class="mui-bar mui-bar-nav" v-show="$store.state.appData.isShowHead">
 			<!--<h1 class="mui-title">{{$store.state.appData.navbarTitle}}</h1>
 			<button id='setting' class=" mui-pull-right mui-btn-link">设置</button>-->
-			<a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack" @click.stop.prevent="goBack" v-show="$store.state.appData.isShowBack"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack" v-show="$store.state.appData.isShowBack"></a>
 			<h1 class="mui-title">{{$store.state.appData.navbarTitle}}</h1>
-			<a class="mui-icon mui-icon-info-filled mui-pull-right" style="color: #999;"></a>
+			<a class="mui-icon mui-pull-right"></a>
 		</header>
 		<div class="pages" :class="{'mui-content': $store.state.appData.isShowHead, 'toolbar-fixed': $store.state.appData.isShowFoot}">
 			<transition :name="$store.state.routerStatus.transition">
@@ -15,6 +15,20 @@
 				<!--</keep-alive>-->
 			</transition>
 		</div>
+		<!--<footer class="mui-bar mui-bar-tab">
+			<router-link class="mui-tab-item mui-active" :to="{name: 'home'}" exact>
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</router-link>
+			<router-link class="mui-tab-item" :to="{name: 'login'}">
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-tab-label">我的集客</span>
+			</router-link>
+			<router-link class="mui-tab-item" :to="{name: 'userCenter'}">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">个人中心</span>
+			</router-link>
+		</footer>-->
 		<footer class="toolbar mui-row" v-show="$store.state.appData.isShowFoot">
 			<div class="mui-col-xs-4 toolbar-icon">
 	            <router-link :to="{name: 'home'}" class="active toolbar-link" exact>
@@ -23,7 +37,7 @@
 	            </router-link>
 	        </div>
 	        <div class="mui-col-xs-4 toolbar-icon">
-	            <router-link :to="{name: 'login'}" class="toolbar-link">
+	            <router-link :to="{name: 'myCustomerGathers'}" class="toolbar-link">
 	            	<span class="mui-icon mui-icon-paperplane"></span>
 	            	我的集客
 	            </router-link>
@@ -72,16 +86,16 @@
 //						url: "http://demo.dcloud.net.cn/test/update/check.php",
 //						success(result){
 //							if(result !== app.Config.innerVersion){
-								//强制更新
-								app.mui.confirm("您的版本需要更新!", null, ["取消", "去下载"], function(result){
-									if(result.index === 1){
-										require(["../js/utils/update"], function(update){
-											update.updateWgt();
-										});
-									} else {
-										plus.runtime.quit();
-									}
-								});
+//								//强制更新
+//								app.mui.confirm("您的版本需要更新!", null, ["取消", "去下载"], function(result){
+//									if(result.index === 1){
+//										require(["../js/utils/update"], function(update){
+//											update.updateWgt();
+//										});
+//									} else {
+//										plus.runtime.quit();
+//									}
+//								});
 //							} else if(!app.globalService.getStartFlag()){
 //								//2.初始化是否启动欢迎页面
 //								_this.$router.push({name: "welcome"});
