@@ -217,6 +217,8 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 |   				|-- login.vue               // 登录页面
 |   				|-- user-center.vue         // 用户中心页面
 |   				|-- welcome.vue         		// 欢迎页面
+|   				|-- ...         		// 其他视图页面
+|   		|-- ...                     // 其他功能模块目录
 |   		|-- app.vue                     // app页面入口文件
 |   		|-- barcode.vue                 // barcode页面入口文件
 |   		|-- home.vue                    // app首页面
@@ -232,44 +234,47 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 ```
 
 ## 上图
-##### 1. 登录页
+##### 1. app首次启动-欢迎页面
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/969A81C308FE49EB9F04FC527DC3CEB1/1098)
+
+##### 2. 登录页
 
 
-##### 2. 首页
+##### 3. 首页
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DF54BD8D51AA4B35A4F54A02EBA0743A/1086)
 
-###### 2. 1. 扫码核销
+###### 3. 1. 扫码核销
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/049F878BA97F4B8BBB581094DC9533CF/1091)
 
 
-###### 2. 2. 会员识别
+###### 3. 2. 会员识别
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0FACF7F6C6894C4E8557AD08658E0A89/1088)
 
-###### 2. 3. 素材列表
+###### 3. 3. 素材列表
 
 
-##### 3. 我的集客
+##### 4. 我的集客
 
 
-###### 3. 1. 会员列表
+###### 4. 1. 会员列表
 
 
-##### 4. 个人中心
+##### 5. 个人中心
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/227254DE56E2459AB053B31352688643/965)
 
-###### 4. 1. 个人资料
+###### 5. 1. 个人资料
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0E885C4086324932B18B816FB2F31B57/1074)
 
-###### 4. 2. 我的收益
+###### 5. 2. 我的收益
 
 
-###### 4. 3. 密码修改
+###### 5. 3. 密码修改
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/BA781772D4964035B55AA432CA0A9C21/972)
 
-###### 4. 4. 消息列表
+###### 5. 4. 消息列表
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/C08C00F62A0E46AE94D8031AFD9E3864/974)
 
-###### 4. 5. 消息内容
+###### 5. 5. 消息内容
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DC592CD8FA92455E8C445120FC6D0242/975)
 
 ## 运行程序
