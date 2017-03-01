@@ -236,14 +236,14 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 
 
 ##### 2. 首页
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DF54BD8D51AA4B35A4F54A02EBA0743A/1086)
 
 ###### 2. 1. 扫码核销
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/049F878BA97F4B8BBB581094DC9533CF/1091)
 
 
 ###### 2. 2. 会员识别
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0FACF7F6C6894C4E8557AD08658E0A89/1088)
 
 ###### 2. 3. 素材列表
 
@@ -257,16 +257,19 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 ##### 4. 个人中心
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/227254DE56E2459AB053B31352688643/965)
 
-###### 4. 1. 我的收益
+###### 4. 1. 个人资料
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/0E885C4086324932B18B816FB2F31B57/1074)
+
+###### 4. 2. 我的收益
 
 
-###### 4. 2. 密码修改
+###### 4. 3. 密码修改
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/BA781772D4964035B55AA432CA0A9C21/972)
 
-###### 4. 3. 消息列表
+###### 4. 4. 消息列表
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/C08C00F62A0E46AE94D8031AFD9E3864/974)
 
-###### 4. 4. 消息内容
+###### 4. 5. 消息内容
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DC592CD8FA92455E8C445120FC6D0242/975)
 
 ## 运行程序
