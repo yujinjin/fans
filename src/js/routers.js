@@ -127,6 +127,7 @@ export default {
 		if(JSON.stringify(store.state.routerStatus.backConfig) !== "{}") {
 			store.dispatch("resetBackConfig");
 		}
+		console.info("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+globalService.isLogin());
 		if(to.meta.auth !== false && !globalService.isLogin()){
 			next({name: 'login', query: Object.assign({toName: to.name}, to.query)});
 			return;

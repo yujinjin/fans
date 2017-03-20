@@ -94,9 +94,9 @@ export default {
 				success(data){
 					app.globalService.setUserInfo({
 						tenancyName: _this.tenancyName, 
-						token: data.authToken, 
+						token: data.token, 
 						usernameOrEmailAddress: _this.usernameOrEmailAddress, 
-						expireTime: data.expiredIn
+						expiredTime: data.expiredTime
 					});
 					_this.go();
 				},
@@ -110,7 +110,7 @@ export default {
 			const [_this, _toName, _current_query] = [this, this.$route.query.toName, this.$route.query];
 			if(_toName){
 				delete _current_query.toName;
-				this.$router.push({name: _current_query.toName, query: _current_query});
+				this.$router.push({name: _toName, query: _current_query});
 			} else {
 				this.$router.push({name: "home"});
 			}

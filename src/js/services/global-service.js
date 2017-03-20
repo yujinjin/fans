@@ -6,7 +6,10 @@
 export default{
 	//判断当前用户信息是否登录
 	isLogin() {
-        return true;
+		if(this.getLoginUserInfo().token){
+			return true;
+		}
+        return false;
     },
     
     //获取启动项标志
@@ -35,7 +38,7 @@ export default{
     //获取用户登录的Token信息
     getLoginUserInfo(){
     	const [_currentTime, _userInfo] = [(new Date()).getTime(), app.getSiteLocalStorage().userInfo || {}];
-    	if(_userInfo.expireTime && (_userInfo.expireTime - _currentTime) > 0) {
+    	if(_userInfo.expiredTime && (_userInfo.expiredTime - _currentTime) > 0) {
     		return _userInfo;
     	} else {
     		app.globalService.setUserInfo({});
@@ -49,14 +52,14 @@ export default{
     },
     
     //设置用户信息
-    setUserInfo({tenancyName, token, usernameOrEmailAddress, expireTime = -1}) {
-    	if(expireTime > 0) {
+    setUserInfo({tenancyName, token, usernameOrEmailAddress, expiredTime = -1}) {
+    	if(expiredTime > 0) {
     		const _site_local_storage = app.getSiteLocalStorage();
 			if(_site_local_storage.userInfo == null || typeof(_site_local_storage.userInfo) != "object"){
 				_site_local_storage.userInfo = {};
 			}
-			expireTime = (new Date()).getTime() + (expireTime - 60) * 1000;
-			Object.assign(_site_local_storage.userInfo, {tenancyName, token, usernameOrEmailAddress, expireTime, version: app.Config.innerVersion});
+			expiredTime = (new Date()).getTime() + (expiredTime - 60) * 1000;
+			Object.assign(_site_local_storage.userInfo, {tenancyName, token, usernameOrEmailAddress, expiredTime, version: app.Config.innerVersion});
     		app.utils.localStorage("siteLocalStorage", JSON.stringify(_site_local_storage));
     	} else {
     		app.utils.localStorage("siteLocalStorage", "{}");
