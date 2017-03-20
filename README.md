@@ -238,10 +238,10 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/969A81C308FE49EB9F04FC527DC3CEB1/1098)
 
 ##### 2. 登录页
-
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/D4B0EB839E53489F9A64F6F3FF5DB45B/1249)
 
 ##### 3. 首页
-![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/DF54BD8D51AA4B35A4F54A02EBA0743A/1086)
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/4450268334F74135AD89CD829DACBB3A/1251)
 
 ###### 3. 1. 扫码核销
 ![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/049F878BA97F4B8BBB581094DC9533CF/1091)
@@ -253,8 +253,8 @@ webpack-require-http           //webapck打包环境下的requrire加载http文�
 ###### 3. 3. 素材列表
 
 
-##### 4. 我的集客
-
+##### 4. 我的集客(随便凑的一个页面)
+![image](http://note.youdao.com/yws/public/resource/1f0d14f63c838cc80fcfc5870b5ec8dc/xmlnote/D4B0EB839E53489F9A64F6F3FF5DB45B/1249)
 
 ###### 4. 1. 会员列表
 
