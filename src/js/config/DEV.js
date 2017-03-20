@@ -5,19 +5,19 @@
  */
 module.exports = {
 	//M站点的接口地址
-	webapiDomain:'http://storeapi.dev.zmscrm.cn',
+	webapiDomain:'http://storeapi.dev.sqj.fanscrm.cn',
 	//M站点的地址
-	msiteDomain:'http://msite.dev.platform.ymc.com',
+	msiteDomain:'',
 	//支付服务器地址
-	payDomain:'http://pay.shdev.yaomaiche.com',
+	payDomain:'',
 	//获取资源服务器地址
-	imageDomain:'http://img.shdev.ymc.com',
+	imageDomain:'',
 	//上传资源服务器地址
-	resourceUploadUrl:'http://resource.shdev.yaomaiche.com/Uploader',
+	resourceUploadUrl:'',
 	//无线H5服务器地址
-	h5ServiceHost:'http://h5.private.yaomaiche.app:7070',
+	h5ServiceHost:'',
 	//公共服务站点地址
-	commonDomain: "http://common.dev.ymc.com:8080"
+	commonDomain: ""
 	//UBT服务器地址
 	
 }

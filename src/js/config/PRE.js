@@ -5,18 +5,18 @@
  */
 module.exports = {
 	//M站点的接口地址
-	webapiDomain:'http://ecmobile.pre.platform.yaomaiche.com',
+	webapiDomain:'',
 	//M站点的地址
-	msiteDomain:'http://msite.pre.platform.yaomaiche.com',
+	msiteDomain:'',
 	//支付服务器地址
-	payDomain:'http://pay.pre.platform.yaomaiche.com',
+	payDomain:'',
 	//获取资源服务器地址
-	imageDomain:'http://img.yaomaiche.com',
+	imageDomain:'',
 	//上传资源服务器地址
-	resourceUploadUrl:'http://resource.yaomaiche.com/Uploader',
+	resourceUploadUrl:'',
 	//无线H5服务器地址
-	h5ServiceHost:'http://h5.private.yaomaiche.app:9090',
+	h5ServiceHost:'',
 	//公共服务站点地址
-	commonDomain: "http://ymcapi.yaomaiche.com/ymc"
+	commonDomain: ""
 	//UBT服务器地址
 }
