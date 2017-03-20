@@ -1,0 +1,10 @@
+{
+	"success": true,
+    "error": null,
+    "result": {
+    	"expiredTime": "1491709490275",
+		"token": "WkL4YIFHMUfaRQcb_U-2XVhZbdYG0XQ1MDxfj93KqHMAsYp3787lu6Ypq70waMO_KvHdAS8ivGje4n01apP-kKvllJmGf3y4fwgqJJFA3fKzFTRMhWl9anK1mvsC8Eb4QUquk9FxFgBSBiHx8H1YnsVFreV758AJI9RIgpn4xFa-eJDdklwpcPvYGo-cfiC7N0ML0snD9nb2zSx58VwePYkMyZxznOuuD4ZPDO85dkqk9nYEGYaENQH5DOAtwi_E1SrOe3CsHstFURzp5Wfvk_FoUddDX1wkWofcgK9aTxU4Fw56",
+		"userID": "550610",
+		"userUniqueCode": "1e92983b-b49a-4640-92bd-5195a353c433"
+    }
+}

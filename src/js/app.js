@@ -70,10 +70,15 @@ const site = {
        	if(!_options.data) {
        		_options.data = {};
        	}
+       	if(_url.lastIndexOf(".json") > -1){
+        	_options.type = "GET";
+        	_options.headers = {"Content-Type": "application/x-www-form-urlencoded"};
+        }
        	if(_options.type.toUpperCase() === 'GET'){
         	_url += '&rnd='+ (+new Date()+'');
         	_options.data = _options.data || {};
-        } else if(!_url.match(/^(?:http|ftp|https):\/\//)){
+        }
+        if(!_url.match(/^(?:http|ftp|https):\/\//) && _url.lastIndexOf(".json") == -1){
         	//如果传的url含有 http://说明是个绝对路径，就不用拼了
             _url = app.Config.webapiDomain + _url;
         }

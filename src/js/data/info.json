@@ -1,0 +1,30 @@
+{
+	"success": true,
+    "error": null,
+    "result": {
+    	"messages":[{
+    		"avatar": "/images/Test/divyia.jpg",
+    		"sender": "Divyia Austin",
+    		"time": "2 minutes ago",
+    		"subject": "Here's the recipe for apple pie",
+    		"body": "to identify the sending application when the senders image is shown for the main icon"
+    	},{
+    		"avatar": "/images/Test/bing.png",
+    		"sender": "Bing.com",
+    		"time": "Yesterday",
+    		"subject": "Bing Newsletter: The January Issue",
+    		"body": "Discover new music just in time for the Grammy® Awards."
+    	},{
+    		"avatar": "/images/Test/adam-jansen.jpg",
+    		"sender": "Nicolas",
+    		"time": "Friday, September 22",
+    		"subject": "New 4K Cameras",
+    		"body": "The 4K revolution has come over the horizon and is reaching the general populous"
+    	}],
+    	"userInfo":{
+    		"headImg": "/images/Test/adam-jansen.jpg",
+    		"userName": "David Stevenson",
+    		"email": "David.Stevenson@live.com"
+    	}
+    }
+}

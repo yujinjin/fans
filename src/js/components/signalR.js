@@ -58,7 +58,7 @@ module.exports = {
    		//$.connection.hub.url = app.Config.webapiDomain + "/signalr/hubs";
    		Promise.all([
 		    require("../lib/jquery.signalR-2.2.1"),
-		    require("http://storeapi.dev.zmscrm.cn/signalr/hubs")
+		    require("http://storeapi.dev.sqj.fanscrm.cn/signalr/hubs")
 		]).then(function() {
 			_this.retgisterQrScan();
    			_this.connect();

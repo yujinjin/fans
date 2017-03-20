@@ -59,9 +59,9 @@
 export default {
 	data() {
 		return {
-			tenancyName: null,
-			usernameOrEmailAddress: null,
-			password: null,
+			tenancyName: "default",
+			usernameOrEmailAddress: "admin",
+			password: "123456",
 			focusName: "tenancyName"
 		}
 	},
@@ -85,7 +85,7 @@ export default {
 			}
 			app.mui(e.target).button('loading');
 			app.ajax({
-				url: "/api/Account/Authenticate",
+				url: app.api.user.login,
 				data: {
 					tenancyName: _this.tenancyName,
 					usernameOrEmailAddress: _this.usernameOrEmailAddress,

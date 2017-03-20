@@ -2,6 +2,7 @@ import babelPolyfill from 'babel-polyfill'
 import mui from "./lib/mui"
 import app from './app'
 import globalService from './services/global-service'
+import api from "./services/api"
 import log from './utils/log'
 import utils from './utils/utils'
 import directives from "./utils/directives"
@@ -13,9 +14,10 @@ import vueApp from "../views/app"
 import store from "./store/"
 import jQuery from "./lib/jquery-1.12.4"
 
+
 Object.assign(app.Config, config);
-window.app = Object.assign({}, app, {log, utils, mui, globalService});
-//signalR是基于jquery的，所以必须要把jQuery引进来，仅仅是用于signalR。太恶心了，其实我TM的真的不想这样...
+window.app = Object.assign({}, app, {log, utils, mui, globalService, api});
+//signalR是基于jquery的，所以必须要把jQuery引进来，Jquery仅仅是用于signalR。太恶心了，其实我TM的真的不想这样...
 window.jQuery = window.$ = jQuery;
 const initVue = function(){
 	Vue.use(Vuex);
