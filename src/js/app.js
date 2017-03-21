@@ -72,9 +72,9 @@ const site = {
        	}
        	if(_url.lastIndexOf(".json") > -1){
         	_options.type = "GET";
-        	_options.headers = {"Content-Type": "application/x-www-form-urlencoded"};
         }
        	if(_options.type.toUpperCase() === 'GET'){
+       		_options.headers = {"Content-Type": "application/x-www-form-urlencoded"};
         	_url += '&rnd='+ (+new Date()+'');
         	_options.data = _options.data || {};
         }

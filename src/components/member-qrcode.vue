@@ -45,11 +45,12 @@
 	    },
 	    watch: {
 	    	show (val, oldVal) {
-      			//console.log(app.mui(this.$refs.loading[0]));
+      			//TODO: 演示代码 (删除)
+      			this.qrcodeImgSrc = require("../imgs/test/1490060610.png");
       			if(val){
       				app.vueApp.$store.dispatch("on", {eventName: "signalr.register", callback: this.onRegister});
       				app.vueApp.$store.dispatch("on", {eventName: "qrScan.received", callback: this.onReceive});
-      				//app.mui(this.$refs.loading[0]).pullRefresh().pullupLoading();
+      				
       				if(!this.$store.state.appData.isConnectionHub) {
 		    			signalR.connectAndRegister();
 		    		} else if($.signalR.abpCommonHub.connection.id){
@@ -76,7 +77,6 @@
 	    	},
 	    	
 	    	onReceive: function(scannerId, properties){
-	    		console.info(scannerId, properties);
 	    		this.$router.push({name: "userCenter"});
 	    	},
 	    	
@@ -84,8 +84,7 @@
 	    		var _this = this;
 	    		app.ajax({
 	    			type: "get",
-	    			headers:{"Content-Type":"application/x-www-form-urlencoded"},
-                    url: app.Config.webapiDomain + "/api/CustomerGather/MyTempQrCode?connectionId="+$.signalR.abpCommonHub.connection.id,
+                    url: app.api.customerGather.myTempQrCode + "?connectionId=" + $.signalR.abpCommonHub.connection.id,
                     success: function (data) {
                     	//"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + 
                     	_this.qrcodeImgSrc = data.url;

@@ -5,5 +5,6 @@
  */
 import user from './api/user-api'
 import order from './api/order'
+import customerGather from './api/customer-gather'
 
-export default {user, order}
+export default {user, order, customerGather}
