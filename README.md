@@ -291,12 +291,14 @@ npm install
 启动DEV服务(http://localhost:8083)
 
 ```
-npm run R_DEV
+npm run R_DEV (window)
+npm run MR_DEV (MAC)
 ```
 打包发布DEV代码
 
 ```
-npm run B_DEV
+npm run B_DEV (window)
+npm run MB_DEV (MAC)
 ```
 
 说明一下：由于要解决移动端iOS操作系统click事件延迟300ms问题，特意使用了tap事件来替代click事件。所以运行时最好是在浏览器中的手机模拟器中操作。
