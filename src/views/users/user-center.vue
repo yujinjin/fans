@@ -36,9 +36,8 @@
 					</a>
 				</li>
 			</ul>
-			
 			<div class="button-panel">
-				<button type="button" class="mui-btn mui-btn-primary mui-btn-block">退出登录</button>
+				<button @tap="logout" type="button" class="mui-btn mui-btn-primary mui-btn-block">退出登录</button>
 			</div>
 		</div>
 	</div>
@@ -61,6 +60,16 @@
 			
 			gotoResetPassword(){
 				this.$router.push({name: "resetPassword"});
+			},
+			
+			logout(){
+				var _this = this;
+				app.mui.confirm("确定要退出登录吗?", "提示", ["取消", "确定"], function(result){
+					if(result.index === 1){
+						app.globalService.logOut();
+						_this.$router.push({name: "login"});
+					}
+				});
 			}
 		}
 	}

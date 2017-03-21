@@ -182,7 +182,7 @@ module.exports = {
 		//自动分析重用的模块并且打包成单独的文件
 		new webpack.ProvidePlugin({
 			//根据环境加载JS
-			config: ROOT_PATH + "\\src\\js\\config\\" + NODE_ENV
+			config: ROOT_PATH + "/src/js/config/" + NODE_ENV
 		})
 	],
 	resolve: {
