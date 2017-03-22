@@ -10,17 +10,50 @@ define(function () {
         //用户
         return {
         	//登录用户
-            "login": app.Config.serverPath + "/src/js/data/login.json",
+            "login": function(ajaxOptions){
+            	//APP环境不接受本地JSON文件获取，就只能通过这样方式调试
+            	if(app.Config.isApp){
+            		return new Promise(function(resolve, reject) {
+            			if(ajaxOptions.success && typeof(ajaxOptions.success) === "function"){
+            				ajaxOptions.success(require("../../data/login.json").result);
+            			}
+        				resolve();
+    				});
+            	}
+            	return app.ajax($.extend({
+		            url: require("file-loader!../../data/login.json"),
+		        }, ajaxOptions));
+            },
             //查询用户基本信息
-            "queryUserInfo": app.Config.serverPath + "/src/js/data/info.json"
+            "queryUserInfo": function(ajaxOptions){
+            	if(app.Config.isApp){
+            		return new Promise(function(resolve, reject) {
+            			if(ajaxOptions.success && typeof(ajaxOptions.success) === "function"){
+            				ajaxOptions.success(require("../../data/info.json").result);
+            			}
+        				resolve();
+    				});
+            	}
+            	return app.ajax($.extend({
+		            url: require("file-loader!../../data/info.json"),
+		        }, ajaxOptions));
+            }
         }
     } else {
         //前端开发模式
         return {
         	//登录用户
-            "login": "/login",
+            "login": function(ajaxOptions){
+            	return app.ajax($.extend({
+		            url: "/api/login",
+		        }, ajaxOptions));
+            },
             //查询用户基本信息
-            "queryUserInfo": "/info"
+            "queryUserInfo": function(ajaxOptions){
+            	return app.ajax($.extend({
+		            url: "/api/info",
+		        }, ajaxOptions));
+            }
         }
     }
 });

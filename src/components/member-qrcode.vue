@@ -82,14 +82,13 @@
 	    	
 	    	loadQrcode(){
 	    		var _this = this;
-	    		app.ajax({
-	    			type: "get",
-                    url: app.api.customerGather.myTempQrCode + "?connectionId=" + $.signalR.abpCommonHub.connection.id,
-                    success: function (data) {
+	    		app.api.customerGather.myTempQrCode({
+	    			data: {connectionId: $.signalR.abpCommonHub.connection.id}, 
+	    			success: function (data) {
                     	//"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + 
                     	_this.qrcodeImgSrc = data.url;
                     }
-                });
+	    		});
 	    	}
 	    }
 	}

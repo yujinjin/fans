@@ -84,8 +84,7 @@ export default {
 				return;
 			}
 			app.mui(e.target).button('loading');
-			app.ajax({
-				url: app.api.user.login,
+			app.api.user.login({
 				data: {
 					tenancyName: _this.tenancyName,
 					usernameOrEmailAddress: _this.usernameOrEmailAddress,

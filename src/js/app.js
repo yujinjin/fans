@@ -110,15 +110,17 @@ const site = {
         	if(typeof(options.success) === "function"){
         		options.success(_data);
         	}
-        	if(typeof(options.complete) === "function"){
-        		options.complete(data, textStatus);
-        	}
         }
-        _options.error = function(xhr, error){
+        _options.complete = function(data, textStatus){
         	if(_options.showLoading === true){
         		_options.showLoading = false;
             	//router.app.$emit('vHideLoad');
             }
+        	if(typeof(options.complete) === "function"){
+        		options.complete(data, textStatus);
+        	}        	
+        }
+        _options.error = function(xhr, error){
             app.log.debug(xhr, error);
         	if(typeof(options.error) === "function"){
         		options.error(xhr, error);
@@ -140,9 +142,6 @@ const site = {
             } else {
                 app.mui.toast('<a href="javascript:void(0);" style="text-decoration: underline;color: #FFF;" onclick="window.location.reload();">亲~服务出错了。点此刷新重试</a>', {duration: 8000, type:'div'});
             }
-        	if(typeof(options.complete) === "function"){
-        		options.complete(xhr, error);
-        	}
         }
         _options.beforeSend = function(xhr){
         	//xhr.setRequestHeader("ClientVersion", app.Config.innerVersion);

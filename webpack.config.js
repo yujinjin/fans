@@ -2,8 +2,8 @@ const path = require('path'),
 	webpack = require('webpack'),
 	NODE_ENV = process.env.NODE_ENV || "DEV", //环境类型
 	NODE_RUN = process.env.NODE_RUN || "0", //是否是运行
-	ROOT_PATH = path.resolve(__dirname) + "\\",
-	OUT_PATH = path.resolve(ROOT_PATH, 'build') + "\\",
+	ROOT_PATH = path.resolve(__dirname) + "/",
+	OUT_PATH = path.resolve(ROOT_PATH, 'build') + "/",
 	SERVER_PATH = process.env.SERVER || "./build/",// 服务路径
 	ExtractTextPlugin = require("extract-text-webpack-plugin"),
 	HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -246,7 +246,7 @@ if(NODE_RUN === "0") {
 					console.info("目录:" + path + fileName);
 					// 目录
 					dirArray.push(path + fileName);
-					clearOutPutDir(path + fileName + "\\");
+					clearOutPutDir(path + fileName + "/");
 				} else {
 					console.info("文件:" + path + fileName);
 					fileSystem.unlinkSync(path + fileName);

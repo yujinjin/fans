@@ -10,13 +10,31 @@ define(function () {
         //前端调试模式
         return {
         	//会员二维码集客
-            "myTempQrCode": app.Config.serverPath + "/src/js/data/myTempQrCode.json"
+            "myTempQrCode": function(ajaxOptions){
+            	//APP环境不接受本地JSON文件获取，就只能通过这样方式调试
+            	if(app.Config.isApp){
+            		return new Promise(function(resolve, reject) {
+            			if(ajaxOptions.success && typeof(ajaxOptions.success) === "function"){
+            				ajaxOptions.success(require("../../data/myTempQrCode.json").result);
+            			}
+        				resolve();
+    				});
+            	}
+            	return app.ajax($.extend({
+		            url: require("file-loader!../../data/myTempQrCode.json"),
+		        }, ajaxOptions));
+            }
         }
     } else {
         //开发模式
         return {
         	//查询订单列表
-            "myTempQrCode": config.webapiDomain + "/api/CustomerGather/MyTempQrCode"
+            "myTempQrCode": function(ajaxOptions){
+            	return app.ajax($.extend({
+            		type: "GET",
+		            url: config.webapiDomain + "/api/CustomerGather/MyTempQrCode",
+		        }, ajaxOptions));
+            }
         }
     }
 });
