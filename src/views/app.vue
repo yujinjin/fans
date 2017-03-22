@@ -110,9 +110,9 @@
 				}
 				
 				//2.初始化是否启动欢迎页面
-//				if(!app.globalService.getStartFlag()){
-//					this.$router.push({name: "welcome"});
-//				}
+				if(!app.globalService.getStartFlag()){
+					this.$router.push({name: "welcome"});
+				}
 //				require(["../js/utils/site-utils.js", "../css/test.css"], function(utils){
 //					console.info("app.vue AMD 加载");
 //				});

@@ -14,7 +14,7 @@ module.exports = {
 	    commons: ['vue', 'vue-router']
 	},
 	output: {
-		path: NODE_RUN === "0" ? './build' : "/",//"./build",//"./build",//path.resolve(__dirname, './build'), //path.resolve(__dirname, './build'), //
+		path: NODE_RUN === "0" ? path.resolve(__dirname, './build') : "/",//"./build",//"./build",//path.resolve(__dirname, './build'), //path.resolve(__dirname, './build'), //
 		//publicPath路径就是你发布之后的路径，比如你想发布到你站点的/util/vue/build 目录下, 那么设置publicPath: "/util/vue/build/",此字段配置如果不正确，发布后资源定位不对，比如：css里面的精灵图路径错误
 		publicPath: NODE_RUN === "0" ? "./build/": "/build/",//"build/",//SERVER_PATH, //process.env.CUSTOM ? "/git/WebApp/n-build/" : "/n-build/",
 		filename: NODE_RUN === "0" ? "build.[hash].js" : "build.js",
