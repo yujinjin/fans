@@ -134,7 +134,6 @@
 				}
 				if(_this.$store.state.routerStatus.backConfig && typeof(_this.$store.state.routerStatus.backConfig.callback) === "function"){
 					_this.$store.state.routerStatus.backConfig.callback(_goBack);
-					delete _this.routerConfig.backOptions;
 				} else {
 					_goBack();
 				}
