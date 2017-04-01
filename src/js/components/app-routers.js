@@ -26,7 +26,7 @@ export default {
 	},
 	
 	//判断当前的页面是否是前进方向
-	isGoing(routerDirection, url){
+	isGoing(isGoing, url){
 		var _historys = this.getHistorys(), 
 			_length = _historys.length, 
 			_current_url = window.location.href;
@@ -38,18 +38,10 @@ export default {
 		if(_referrer && document.referrer.indexOf(location.host) === -1 && this.referrer != document.referrer){
 			return true;
 		}
-		if(routerDirection === "going" || routerDirection === "replace"){
-			//正常前进
-			return true;
-		} 
-//			else if(routerDirection === "backing后退")(
-//				return false;
-//			} else if (_length > 1 && _historys[_length-2].url == _current_url){
-//				return false;
-//			} else {
-//				return false;
-//			}
-		return false;
+		if(isGoing !== true && _length > 1 && _historys[_length-2].url == _current_url){
+			return false;
+		}
+		return true;
 	},
 	
 	//direction: null, //going：前进|backing后退|replace：浏览历史中替换最后一条历史|null:用户操作浏览器的返回或者前进按钮，这个只能通过历史
@@ -88,6 +80,7 @@ export default {
 			isGoing = true;
 			//console.debug("浏览器中前进");
 		}
+		
 		app.utils.localStorage("historys", JSON.stringify(_historys));
 		return isGoing;
 	},

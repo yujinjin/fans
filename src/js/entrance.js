@@ -61,7 +61,6 @@ if(mui.os.plus) {
 	});
 }
 
-
 //require("../less/app.less"); //加载公共样式
 //window.app = require("./app.js"); //加载公共样式,
 //var Vue = require('vue');

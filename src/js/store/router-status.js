@@ -31,11 +31,9 @@ export default {
 	},
 	actions: {
 		updateDirection({commit}, direction){
-			console.info(".............updateDirection");
 			commit("updateDirection", direction);
 		},
 		updateTransition({commit}, transition){
-			console.info(".............updateTransition");
 			commit("updateTransition", transition);
 		},
 		updateBackConfig({commit}, config){

@@ -70,12 +70,10 @@
 		// 不！能！获取组件实例 `this`
 		// 因为当钩子执行前，组件实例还没被创建
 		created() {
-			console.info("app.vue ..... created");
 			this.initApp();
 		},
 		
 		mounted(){
-			console.info("app.vue .... mounted");
 		},
 		methods: {
 			initApp: function() {

@@ -26,7 +26,8 @@ app打包技术是用[HBuilder IDE](http://www.dcloud.io/index.html)工具一键
 > 7. 使用signalR实现客户端与服务端长时间通信
 > 
 > 8. 使用webpack2实现对模块打包、压缩、混淆，预处理，热加载。
-
+> 
+> 9. 自己实现了一套路由机制，但它只适用于app中使用h5的header。
 
 **吐槽：** 我想吐槽一下webpack2的webpack.config.js中各个插件配置，当时配置了好几天，这个loader配置好了，另外一个又出问题了，而且网上关于webapck2 API太少了，都是靠摸索着前进，真的是好难配。那有人肯定问了为啥不用VUE官方提供的vue-cli创建项目，我想说兄弟呀那个vue-cli是针对webpack1的，我想用webpack2（不要问我为什么，我就是固执的想用），而且官方配置的JS太TM的不直接了，10个配置文件我想改一些配置得看半天。
 

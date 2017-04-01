@@ -49,7 +49,6 @@
 	        
 	        closeScan(){
 	        	if(this.barcode){
-	        		console.info("closeScan...................");
 	        		this.barcode.close();
 	        		this.barcode = null;
 	        	}

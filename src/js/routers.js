@@ -96,21 +96,24 @@ export default {
 		//const [_push, _go, _replace] = [router.push, router.go, router.replace];
 		const {push, go, replace} = router;
 		router.push = function(location) {
-			console.info("........push");
 			if(!store.state.routerStatus.direction){
 				store.dispatch("updateDirection", "going");
 			}
 			push.call(this, location);
 		}
-		router.go = function(n) {
-			console.info("........go");
+		router.go = function(location) {
 			if(store.state.routerStatus.direction != "backing"){
+				store.dispatch("updateDirection", "backing");
+			}
+			app.log.error("app 不到万不得已不要用go来后退，这个直接会导致路由混乱");
+			if(location > 0){
+				store.dispatch("updateDirection", "going");
+			} else {
 				store.dispatch("updateDirection", "backing");
 			}
 			go.call(this, location);
 		}
 		router.replace = function(location) {
-			console.info("........replace");
 			if(store.state.routerStatus.direction != "replace"){
 				store.dispatch("updateDirection", "replace");
 			}
@@ -123,13 +126,22 @@ export default {
 
 	//访问之前的函数
 	beforeEach(to, from, next, store){
-		console.info(to.name + "...................beforeEach");
 		if(JSON.stringify(store.state.routerStatus.backConfig) !== "{}") {
 			store.dispatch("resetBackConfig");
 		}
 		if(to.meta.auth !== false && !globalService.isLogin()){
 			next({name: 'login', query: Object.assign({toName: to.name}, to.query)});
 			return;
+		}
+		// 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed （确认的）。
+		// next(false): 中断当前的导航。如果浏览器的 URL 改变了（可能是用户手动或者浏览器后退按钮），那么 URL 地址会重置到 from 路由对应的地址。
+		// next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。
+		next();
+		const _direction = store.state.routerStatus.direction;
+		if(!_direction) {
+			store.dispatch("updateDirection", appRouters.isGoing(false, window.location.href) ? "going" : "backing");
+		} else if(_direction === "replace"){
+			appRouters.pop();
 		}
 		switch(to.name) {
 			case 'home':
@@ -161,32 +173,19 @@ export default {
 				store.dispatch("updateNavbarStatus",{isShowFoot: false});
 				break;
 		}
-//		if(site.globalService.isLogin() && "_login _reg _smslogin".indexOf(transition.to.name) != -1) {
-//			next({path: '/login', query: { redirect: to.fullPath }});
-//			return;
-//		}
-		// 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed （确认的）。
-		// next(false): 中断当前的导航。如果浏览器的 URL 改变了（可能是用户手动或者浏览器后退按钮），那么 URL 地址会重置到 from 路由对应的地址。
-		// next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。
-		next();
-		if(store.state.routerStatus.direction) {
-			appRouters.push((store.state.routerStatus.direction == "going" || store.state.routerStatus.direction == "backing" || store.state.routerStatus.direction == "replace"), {
-				name: to.name,
-				query: to.query,
-				url: window.location.href
-			});
-		} else {
-			store.dispatch("updateDirection", appRouters.push(false, {name: to.name, query: to.query, url: window.location.href}) ? "going" : "backing");
-		}
-		console.info("...................next");
+		appRouters.push(_direction && (store.state.routerStatus.direction == "going" || store.state.routerStatus.direction == "backing" || store.state.routerStatus.direction == "replace"), {
+			name: to.name,
+			query: to.query,
+			url: window.location.href
+		});
 		store.dispatch("updateDirection", null);
 	},
 	
 	//可以记录访问路径
 	afterEach(router, store){
-		console.info("...................afterEach");
 		if(router.meta.title && router.meta.title != store.state.appData.navbarTitle){
 			store.dispatch("updateNavbarTitle", router.meta.title);
+			document.title = "粉丝煲-" + router.meta.title || "";
 		}
 	}
 }

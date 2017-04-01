@@ -66,7 +66,6 @@ module.exports = {
     },
     components: {memberQrcode},
     created: function(){
-    	console.info("home.vue  ....created");
     },
     beforeRouteEnter: function(to, from, next) {
 		// 在渲染该组件的对应路由被 confirm 前调用
@@ -96,8 +95,6 @@ module.exports = {
         },
         
         scanResult(type, result){
-        	console.info("......................scanResult");
-        	console.info(type+"......................"+result);
         }
     },
     beforeRouteLeave: function(to, from, next) {
