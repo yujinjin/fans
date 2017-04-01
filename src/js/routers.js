@@ -1,5 +1,4 @@
 import globalService from './services/global-service'
-import appRouters from "./components/app-routers"
 
 export default {
 	routes: [{
@@ -105,8 +104,8 @@ export default {
 			if(store.state.routerStatus.direction != "backing"){
 				store.dispatch("updateDirection", "backing");
 			}
-			app.log.error("app 不到万不得已不要用go来后退，这个直接会导致路由混乱");
 			if(location > 0){
+				app.log.error("app 不到万不得已不要用go来前进，这样无法分辨出页面动画的左右切换。");
 				store.dispatch("updateDirection", "going");
 			} else {
 				store.dispatch("updateDirection", "backing");
@@ -136,48 +135,36 @@ export default {
 		// 进行管道中的下一个钩子。如果全部钩子执行完了，则导航的状态就是 confirmed （确认的）。
 		// next(false): 中断当前的导航。如果浏览器的 URL 改变了（可能是用户手动或者浏览器后退按钮），那么 URL 地址会重置到 from 路由对应的地址。
 		// next('/') 或者 next({ path: '/' }): 跳转到一个不同的地址。当前的导航被中断，然后进行一个新的导航。
-		next();
-		const _direction = store.state.routerStatus.direction;
-		if(!_direction) {
-			store.dispatch("updateDirection", appRouters.isGoing(false, window.location.href) ? "going" : "backing");
-		} else if(_direction === "replace"){
-			appRouters.pop();
+		if(store.state.routerStatus.direction) {
+			store.dispatch("updateDirection", store.state.routerStatus.direction);
+		} else {
+			store.dispatch("updateDirection", "backing");
 		}
 		switch(to.name) {
 			case 'home':
 				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
-				appRouters.clear();
 				break;
 			case 'userCenter':
 				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
-				appRouters.clear();
 				break;
 			case 'myCustomerGathers':
 				store.dispatch("updateNavbarStatus",{isShowHead: false, isShowBack: false});
-				appRouters.clear();
 				break;
 			case 'login':
 				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: true, isShowFoot: false});
-				appRouters.clear();
 				break;
 			case 'welcome':
 				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: false, isShowFoot: false});
-				appRouters.clear();
 				break;
 			case 'barcode':
 				store.dispatch("updateTransition", null);
 				store.dispatch("updateNavbarStatus",{isShowBack: false, isShowHead: false, isShowFoot: false});
-				appRouters.clear();
 				break;
 			default:
 				store.dispatch("updateNavbarStatus",{isShowFoot: false});
 				break;
 		}
-		appRouters.push(_direction && (store.state.routerStatus.direction == "going" || store.state.routerStatus.direction == "backing" || store.state.routerStatus.direction == "replace"), {
-			name: to.name,
-			query: to.query,
-			url: window.location.href
-		});
+		next();
 		store.dispatch("updateDirection", null);
 	},
 	

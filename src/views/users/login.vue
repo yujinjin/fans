@@ -109,9 +109,9 @@ export default {
 			const [_this, _toName, _current_query] = [this, this.$route.query.toName, this.$route.query];
 			if(_toName){
 				delete _current_query.toName;
-				this.$router.push({name: _toName, query: _current_query});
+				this.$router.replace({name: _toName, query: _current_query});
 			} else {
-				this.$router.push({name: "home"});
+				this.$router.replace({name: "home"});
 			}
 		}
 	}

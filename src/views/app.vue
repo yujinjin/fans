@@ -61,7 +61,6 @@
 	import '../css/mui.css'
 	import '../css/icons-extra.css'
 	import "../less/app.less" //加载公共样式
-	import appRouters from "../js/components/app-routers"
 	export default {
 		data: function() {
 			return {};
@@ -118,23 +117,18 @@
 			//返回按钮
 			goBack: function(){
 				const _this = this, _goBack = function(){
-					appRouters.back(function(routerOptions) {
-						if(routerOptions && routerOptions.name) {
-							//考虑用replace不恰当，浏览器的返回一样是有问题的
-							_this.$router.push(routerOptions);
-						} else if(routerOptions && routerOptions.url) {
-							window.location.href = routerOptions.url;
-						} else {
-							_this.$router.push({name: 'home'});
-						}
-					}, JSON.stringify(_this.$store.state.routerStatus.backConfig)=="{}"?null:_this.$store.state.routerStatus.backConfig);
-				}
-				if(_this.$store.state.routerStatus.direction != "backing"){
-					_this.$store.dispatch("updateDirection", "backing");
+					if(_this.$store.state.routerStatus.backConfig.name) {
+						_this.$store.dispatch("updateDirection", "going");
+						_this.$router.replace(_this.$store.state.routerStatus.backConfig);
+					} else if(_this.$store.state.routerStatus.backConfig.url){
+						window.location.href = routerOptions.url;
+					} else {
+						_this.$store.dispatch("updateDirection", "backing");
+						_this.$router.go(-1);
+					}
 				}
 				if(_this.$store.state.routerStatus.backConfig && typeof(_this.$store.state.routerStatus.backConfig.callback) === "function"){
 					_this.$store.state.routerStatus.backConfig.callback(_goBack);
-					delete _this.routerConfig.backOptions;
 				} else {
 					_goBack();
 				}
