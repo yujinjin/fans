@@ -22,8 +22,8 @@
 	"scripts": {
 		"R_DEV": "set NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8083",
 		"MR_DEV": "export NODE_RUN=1&&webpack-dev-server --progress --watch --inline --host=0.0.0.0  --port 8083",
-		"B_DEV":"set NODE_ENV=dev&set NODE_RUN=0&webpack --progress --hide-modules",
-		"MB_DEV": "export NODE_ENV=dev&export NODE_RUN=0&webpack --progress --hide-modules",
+		"B_DEV":"set NODE_ENV=dev&&set NODE_RUN=0&&webpack --progress --hide-modules",
+		"MB_DEV": "export NODE_ENV=dev&&export NODE_RUN=0&&webpack --progress --hide-modules",
 		"lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
 	},
 	"dependencies": {
